@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import AmoebaLogo from '../components/AmoebaLogo.astro';
+import InteractiveCards from '../components/InteractiveCards';
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/kerrshift-logo-32x32.png" />
+		<link rel="icon" type="image/png" sizes="128x128" href="/assets/logo/kerrshift-logo-128x128.png" />
+		<link rel="apple-touch-icon" sizes="512x512" href="/assets/logo/kerrshift-logo-512x512.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>KerrShift</title>
+		
+		<!-- Premium Modern Typeface: Sora & JetBrains Mono -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+		
+		<style>
+			.font-brand {
+				font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+				letter-spacing: -0.02em;
+			}
+		</style>
+	</head>
+	<body class="min-h-screen bg-[#030305] text-slate-100 flex flex-col justify-center items-center selection:bg-cyan-500 selection:text-black overflow-x-hidden p-4 sm:p-6 md:p-10 lg:p-12 antialiased">
+
+		<!-- Centered Single Page Showcase -->
+		<main class="w-full max-w-4xl flex flex-col items-center justify-center text-center my-auto py-8">
+			
+			<!-- Logo: Black Square Tile with Gradient Amoeba -->
+			<div class="mb-10 sm:mb-12 hover:opacity-90 transition-opacity duration-200">
+				<AmoebaLogo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24" />
+			</div>
+
+			<!-- KerrShift in Sora (Clean, Generously Spaced, Modern Geometric) -->
+			<div class="mb-16 sm:mb-20 w-full">
+				<h1 class="font-brand text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold text-white select-none leading-none tracking-tight">
+					KerrShift
+				</h1>
+			</div>
+
+			<!-- Connected Hairline Cards -->
+			<div class="w-full">
+				<InteractiveCards client:load />
+			</div>
+
+		</main>
+
+	</body>
+</html>
