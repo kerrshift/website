@@ -11,6 +11,9 @@ importers:
       '@astrojs/react':
         specifier: ^6.0.5
         version: 6.0.5(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(jiti@2.7.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@hcaptcha/react-hcaptcha':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@types/react':
         specifier: ^19.2.18
         version: 19.2.18
@@ -441,6 +444,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@hcaptcha/react-hcaptcha@2.2.0':
+    resolution: {integrity: sha512-/HrPgNLRrJziLrh2s+qFRO33ubBSuHn9sdNsQcP0wQElpORxlpR6wnq3X9j/bZGd+uQtYIvPl4QSU2la+Jl9Hg==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2171,6 +2177,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
+
+  '@hcaptcha/react-hcaptcha@2.2.0': {}
 
   '@img/colour@1.1.0': {}
 

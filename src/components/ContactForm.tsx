@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowUpRight, Check, Loader2, ChevronDown } from 'lucide-react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import SectionHeader from './SectionHeader';
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const captchaRef = useRef<HCaptcha>(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +19,12 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      setErrorMessage('Please complete the captcha verification before submitting.');
+      return;
+    }
+
     setLoading(true);
     setErrorMessage('');
 
@@ -28,6 +38,7 @@ export default function ContactForm() {
       formDataToSend.append('message', formData.message);
       formDataToSend.append('subject', `KerrShift Inquiry: ${formData.inquiryType}`);
       formDataToSend.append('from_name', 'KerrShift Studio');
+      formDataToSend.append('h-captcha-response', captchaToken);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -37,11 +48,16 @@ export default function ContactForm() {
       const result = await response.json();
       if (result.success) {
         setSubmitted(true);
+        setCaptchaToken('');
       } else {
         setErrorMessage(result.message || 'Unable to send message. Please try again.');
+        captchaRef.current?.resetCaptcha();
+        setCaptchaToken('');
       }
     } catch {
       setErrorMessage('Network issue. Please try submitting again.');
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken('');
     } finally {
       setLoading(false);
     }
@@ -170,6 +186,24 @@ export default function ContactForm() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-transparent border-b-2 border-neutral-300 hover:border-neutral-700 focus:border-neutral-950 py-3.5 text-base sm:text-lg text-neutral-950 placeholder:text-neutral-400 outline-none transition-colors font-hero-minimal font-normal resize-none leading-relaxed rounded-none"
                   ></textarea>
+                </div>
+
+                {/* hCaptcha Spam Protection */}
+                <div className="pt-2">
+                  <HCaptcha
+                    ref={captchaRef}
+                    sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                    onVerify={(token) => {
+                      setCaptchaToken(token);
+                      setErrorMessage('');
+                    }}
+                    onExpire={() => setCaptchaToken('')}
+                    onError={() => {
+                      setCaptchaToken('');
+                      setErrorMessage('Captcha verification error. Please retry.');
+                    }}
+                    theme="light"
+                  />
                 </div>
 
                 {/* Error Banner */}
