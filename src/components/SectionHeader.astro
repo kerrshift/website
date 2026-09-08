@@ -1,0 +1,34 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  subtitle?: string;
+  rightLabel?: string;
+  className?: string;
+}
+
+const {
+  number,
+  title,
+  subtitle,
+  rightLabel,
+  className = "mb-16 sm:mb-20"
+} = Astro.props;
+---
+
+<div class={`flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 ${className}`}>
+  <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-neutral-500">
+    <span class="text-neutral-950 font-semibold">{number}</span>
+    <span class="text-neutral-300 select-none">/</span>
+    <span class="text-neutral-800">{title}</span>
+    {subtitle && (
+      <>
+        <span class="text-neutral-300 select-none">&bull;</span>
+        <span class="text-neutral-500">{subtitle}</span>
+      </>
+    )}
+  </div>
+  {rightLabel && (
+    <span class="font-mono text-xs text-neutral-600">{rightLabel}</span>
+  )}
+</div>

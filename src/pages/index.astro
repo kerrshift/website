@@ -1,11 +1,14 @@
 ---
+import Header from '../components/Header.astro';
+import AgentDiffShowcase from '../components/AgentDiffShowcase.astro';
+import Principles from '../components/Principles.astro';
+import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import AmoebaLogo from '../components/AmoebaLogo.astro';
-import InteractiveCards from '../components/InteractiveCards';
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,43 +17,140 @@ import InteractiveCards from '../components/InteractiveCards';
 		<link rel="apple-touch-icon" sizes="512x512" href="/assets/logo/kerrshift-logo-512x512.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>KerrShift</title>
+		<title>KerrShift — AI & Software Engineering Studio | Creator of AgentDiff</title>
+		<meta name="description" content="KerrShift is an AI & software development studio founded by Sahil Gangurde. Architects of AgentDiff (the open agent trajectory verification engine) and custom production systems." />
+		<meta name="keywords" content="KerrShift, AgentDiff, Sahil Gangurde, lostmartian, AI engineering studio, autonomous agents, trajectory diff, LLM testing, AI evaluation, CI agent gating, developer tooling, web app studio, custom AI architecture" />
+		<meta name="author" content="Sahil Gangurde" />
+		<link rel="canonical" href="https://kerrshift.com/" />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://kerrshift.com/" />
+		<meta property="og:title" content="KerrShift — AI & Software Engineering Studio | Creator of AgentDiff" />
+		<meta property="og:description" content="KerrShift builds next-generation software primitives and autonomous AI systems. Parent studio of AgentDiff, founded by Sahil Gangurde." />
+		<meta property="og:site_name" content="KerrShift" />
+		<meta property="og:image" content="https://kerrshift.com/og.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="KerrShift Studio — AI & Software Engineering Studio founded by Sahil Gangurde" />
+
+		<!-- Twitter Meta -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="KerrShift — AI & Software Engineering Studio | Creator of AgentDiff" />
+		<meta name="twitter:description" content="KerrShift builds next-generation software primitives and autonomous AI systems. Parent studio of AgentDiff, founded by Sahil Gangurde." />
+		<meta name="twitter:image" content="https://kerrshift.com/og.png" />
+		<meta name="twitter:image:alt" content="KerrShift Studio — AI & Software Engineering Studio founded by Sahil Gangurde" />
+
+		<!-- Structured Data (JSON-LD Schema for KerrShift, AgentDiff, and Founder Sahil Gangurde) -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Organization",
+						"@id": "https://kerrshift.com/#organization",
+						"name": "KerrShift",
+						"url": "https://kerrshift.com",
+						"description": "Software & AI development studio building autonomous systems, developer tooling, and production-grade applications.",
+						"founder": {
+							"@type": "Person",
+							"@id": "https://lostmartian.in/#person",
+							"name": "Sahil Gangurde",
+							"url": "https://lostmartian.in"
+						},
+						"sameAs": [
+							"https://github.com/kerrshift"
+						]
+					},
+					{
+						"@type": "SoftwareApplication",
+						"@id": "https://agentdiff.app/#software",
+						"name": "AgentDiff",
+						"url": "https://agentdiff.app",
+						"applicationCategory": "DeveloperApplication",
+						"operatingSystem": "Cross-platform",
+						"description": "Open Agent Trajectory Verification Engine for testing, cost governance, and loop defense in AI agents.",
+						"creator": {
+							"@id": "https://kerrshift.com/#organization"
+						}
+					},
+					{
+						"@type": "Person",
+						"@id": "https://lostmartian.in/#person",
+						"name": "Sahil Gangurde",
+						"url": "https://lostmartian.in",
+						"jobTitle": "Founder",
+						"worksFor": {
+							"@id": "https://kerrshift.com/#organization"
+						}
+					}
+				]
+			}
+		</script>
 		
-		<!-- Premium Modern Typeface: Sora & JetBrains Mono -->
+		<!-- Preconnect to Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-		
-		<style>
-			.font-brand {
-				font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-				letter-spacing: -0.02em;
-			}
-		</style>
+		<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600&family=Inter:wght@300;350;400;450;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;450;500&display=swap" rel="stylesheet" />
 	</head>
-	<body class="min-h-screen bg-[#030305] text-slate-100 flex flex-col justify-center items-center selection:bg-cyan-500 selection:text-black overflow-x-hidden p-4 sm:p-6 md:p-10 lg:p-12 antialiased">
+	<body class="min-h-screen bg-[#fafafc] text-neutral-900 flex flex-col selection:bg-neutral-900 selection:text-white antialiased">
 
-		<!-- Centered Single Page Showcase -->
-		<main class="w-full max-w-4xl flex flex-col items-center justify-center text-center my-auto py-8">
+		<!-- 1. First Viewport: Header + Full-Screen Left-Aligned Minimal Hero -->
+		<div class="min-h-screen flex flex-col relative overflow-hidden">
 			
-			<!-- Logo: Black Square Tile with Gradient Amoeba -->
-			<div class="mb-10 sm:mb-12 hover:opacity-90 transition-opacity duration-200">
-				<AmoebaLogo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24" />
-			</div>
+			<!-- Rich, deep animated gradient mesh canvas spanning header and hero -->
+			<div class="pointer-events-none absolute inset-0 w-full h-full hero-gradient-ambient"></div>
 
-			<!-- KerrShift in Sora (Clean, Generously Spaced, Modern Geometric) -->
-			<div class="mb-16 sm:mb-20 w-full">
-				<h1 class="font-brand text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold text-white select-none leading-none tracking-tight">
-					KerrShift
+			<!-- Minimal Header: KerrShift, normal text, transparent background -->
+			<Header />
+
+			<!-- Hero: Left-aligned, consuming the rest of the first viewport -->
+			<section class="flex-1 flex flex-col justify-center items-start text-left px-6 sm:px-10 lg:px-16 max-w-7xl w-full mx-auto py-12 relative z-10">
+				
+				<!-- Clean, uniform typography single-line with text-balance and no orphan words -->
+				<h1 class="font-hero-minimal text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] text-neutral-900 leading-[1.15] tracking-[-0.035em] max-w-6xl select-none [text-wrap:balance]">
+					Something is shifting in&nbsp;the&nbsp;quiet.
 				</h1>
-			</div>
 
-			<!-- Connected Hairline Cards -->
-			<div class="w-full">
-				<InteractiveCards client:load />
-			</div>
+				<!-- Subtle scroll hint aligned to the left -->
+				<div class="mt-16 sm:mt-24">
+					<a 
+						href="#showcase" 
+						aria-label="Scroll down to AgentDiff showcase"
+						class="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-800 transition-colors uppercase tracking-widest"
+					>
+						<span>Product</span>
+						<span class="text-sm">&darr;</span>
+					</a>
+				</div>
 
+			</section>
+
+		</div>
+
+		<!-- Main Studio Flow: Chapters 1, 2, and 3 -->
+		<main id="showcase" class="w-full bg-transparent relative z-10">
+			<!-- Chapter 1: Product Showcase (AgentDiff) -->
+			<section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32 border-t border-black/[0.05]">
+				<AgentDiffShowcase />
+			</section>
+
+			<!-- Chapter 2: Studio Philosophy & Principles -->
+			<Principles />
 		</main>
+
+		<!-- Continuous Animated Gradient Mesh Container spanning Contact Form & Footer (identical to Hero/Header) -->
+		<div class="relative overflow-hidden w-full bg-[#fafafc]">
+			<!-- Same rich animated gradient mesh as Hero & Header -->
+			<div class="pointer-events-none absolute inset-0 w-full h-full hero-gradient-ambient"></div>
+
+			<!-- Chapter 3: Contact Form (Direct Transmission) -->
+			<ContactForm client:load />
+
+			<!-- Minimal Craft Footer -->
+			<Footer />
+		</div>
 
 	</body>
 </html>

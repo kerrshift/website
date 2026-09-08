@@ -1,0 +1,129 @@
+---
+import { ArrowUpRight } from "lucide-react";
+import SectionHeader from "./SectionHeader.astro";
+---
+
+<div class="w-full text-left">
+  
+  <!-- Narrative Transition Header -->
+  <SectionHeader
+    number="01"
+    title="The Product"
+    subtitle="Engine v0.5.0"
+    rightLabel="Open Trajectory Verification"
+  />
+
+  <!-- Big Heroic Product Stage -->
+  <div class="mb-20 sm:mb-24">
+    <!-- Big Logo + Product Headline Locked in One Line -->
+    <div class="flex items-center gap-4 sm:gap-6 md:gap-8 mb-8">
+      <a
+        href="https://agentdiff.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="AgentDiff App"
+        class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-neutral-950 text-white border border-neutral-800/80 shadow-[0_12px_32px_rgba(0,0,0,0.08)] shrink-0 hover:scale-105 transition-transform duration-300 group"
+      >
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white group-hover:text-emerald-400 transition-colors"
+          aria-hidden="true"
+        >
+          <circle cx="2.9" cy="8" r="1.5" fill="currentColor" stroke="none"></circle>
+          <path d="M3.4 8 L8.25 8"></path>
+          <path d="M8.25 8 L13.4 5"></path>
+          <path d="M8.25 8 L13.4 11"></path>
+          <circle cx="13.5" cy="5" r="1.05" fill="currentColor" stroke="none"></circle>
+          <circle cx="13.5" cy="11" r="1.05" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </a>
+
+      <div class="flex flex-wrap items-baseline gap-4">
+        <a
+          href="https://agentdiff.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-3 text-neutral-950 hover:text-neutral-600 transition-colors"
+        >
+          <h2 class="font-hero-minimal text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-normal whitespace-nowrap">
+            Agent<span class="text-neutral-500 font-light">Diff</span>
+          </h2>
+          <ArrowUpRight className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 text-neutral-500 group-hover:text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Product Marketing Headline -->
+    <p class="font-hero-minimal text-2xl sm:text-3xl md:text-4xl text-neutral-950 font-normal leading-snug max-w-4xl [text-wrap:balance] mb-6">
+      Ship AI agents with complete confidence.
+    </p>
+
+    <!-- Clear Value Story -->
+    <p class="font-hero-minimal text-lg sm:text-xl text-neutral-700 font-light leading-relaxed max-w-3xl mb-10">
+      Traditional tests only look at the final sentence. AgentDiff watches how your agent worked—catching infinite tool loops, silent hallucinations, and sudden cost surges before they ever reach real customers.
+    </p>
+
+    <!-- Product Action Bar -->
+    <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+      <a
+        href="https://agentdiff.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-neutral-950 hover:bg-neutral-800 text-white text-xs font-mono tracking-wider uppercase transition-all shadow-sm"
+      >
+        <span>Explore AgentDiff</span>
+        <ArrowUpRight className="w-3.5 h-3.5" />
+      </a>
+
+      <div class="inline-flex items-center gap-2 px-4 py-3 bg-black/[0.04] border border-black/[0.08] font-mono text-xs text-neutral-800">
+        <span class="text-neutral-400 select-none">$</span>
+        <span>pip install agent-trajectory-diff</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Crisp Product Pillars (The Value Story) -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 pt-12 border-t border-black/[0.08]">
+    <div>
+      <span class="font-mono text-xs text-neutral-500 uppercase tracking-wider block mb-2 font-medium">
+        01 &bull; Budget Protection
+      </span>
+      <h3 class="font-hero-minimal text-xl text-neutral-950 font-normal mb-2">
+        Never surprise your bill
+      </h3>
+      <p class="font-hero-minimal text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+        A small prompt tweak can quietly double your token consumption. AgentDiff halts expensive runs automatically before you deploy.
+      </p>
+    </div>
+
+    <div>
+      <span class="font-mono text-xs text-neutral-500 uppercase tracking-wider block mb-2 font-medium">
+        02 &bull; Loop Defense
+      </span>
+      <h3 class="font-hero-minimal text-xl text-neutral-950 font-normal mb-2">
+        Catch agents getting stuck
+      </h3>
+      <p class="font-hero-minimal text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+        Identifies runaway loops and cyclical retry dead-ends in milliseconds, ensuring zero broken customer conversations.
+      </p>
+    </div>
+
+    <div>
+      <span class="font-mono text-xs text-neutral-500 uppercase tracking-wider block mb-2 font-medium">
+        03 &bull; Seamless CI/CD
+      </span>
+      <h3 class="font-hero-minimal text-xl text-neutral-950 font-normal mb-2">
+        Runs right inside your PRs
+      </h3>
+      <p class="font-hero-minimal text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+        Plugs directly into GitHub Actions. If an agent drifts from its golden path, you get an instant root-cause diagnostic comment.
+      </p>
+    </div>
+  </div>
+
+</div>

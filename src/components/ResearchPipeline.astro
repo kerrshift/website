@@ -1,0 +1,113 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+---
+
+<section class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32 border-t border-black/[0.06] text-left">
+  
+  <!-- Section Overline -->
+  <SectionHeader
+    number="04"
+    title="Research Pipeline"
+    subtitle="In-Flight Systems"
+    className="mb-12 sm:mb-16"
+  />
+
+  <!-- Headline Statement -->
+  <div class="mb-16 sm:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+      <h2 class="font-hero-minimal text-3xl sm:text-5xl lg:text-6xl text-neutral-950 tracking-tight font-normal max-w-3xl leading-tight">
+        What we're working on next.
+      </h2>
+      <p class="font-hero-minimal text-lg sm:text-xl text-neutral-500 font-light leading-relaxed mt-4 max-w-xl">
+        Experimental prototypes and architectural primitives currently under active development in our lab.
+      </p>
+    </div>
+    <span class="font-mono text-xs text-neutral-400">R&amp;D Roadmap &bull; 2026</span>
+  </div>
+
+  <!-- Research Items: Clean, Minimal Rows with Hairline Dividers -->
+  <div class="border-t border-black/[0.06] divide-y divide-black/[0.06]">
+    
+    <!-- Item 01: Latent Memory Fabric -->
+    <div class="py-10 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-baseline">
+      <div class="md:col-span-3">
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-wider block mb-1">
+          Project 02
+        </span>
+        <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-600">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          Active Prototyping
+        </span>
+      </div>
+
+      <div class="md:col-span-5">
+        <h3 class="font-hero-minimal text-2xl sm:text-3xl text-neutral-950 font-normal tracking-tight mb-3">
+          Latent Memory Fabric
+        </h3>
+        <p class="font-hero-minimal text-sm sm:text-base text-neutral-500 font-light leading-relaxed">
+          A persistent, shared memory substrate for multi-agent swarms. Eliminates context re-ingestion costs by sharing compressed state graphs across parallel workers.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 font-mono text-xs text-neutral-400 md:text-right">
+        <span>Target: Local State &bull; Zero Cloud</span>
+      </div>
+    </div>
+
+    <!-- Item 02: Deterministic Sandbox -->
+    <div class="py-10 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-baseline">
+      <div class="md:col-span-3">
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-wider block mb-1">
+          Project 03
+        </span>
+        <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-neutral-500">
+          <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+          Theoretical R&amp;D
+        </span>
+      </div>
+
+      <div class="md:col-span-5">
+        <h3 class="font-hero-minimal text-2xl sm:text-3xl text-neutral-950 font-normal tracking-tight mb-3">
+          Kernel Runtime
+        </h3>
+        <p class="font-hero-minimal text-sm sm:text-base text-neutral-500 font-light leading-relaxed">
+          Air-gapped execution virtual machines for untrusted LLM tool calling. Enforces deterministic resource budgets and hard system call isolation.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 font-mono text-xs text-neutral-400 md:text-right">
+        <span>Target: WebAssembly &bull; POSIX</span>
+      </div>
+    </div>
+
+    <!-- Item 03: Collaborative Research Inquiry -->
+    <div class="py-10 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-baseline">
+      <div class="md:col-span-3">
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-wider block mb-1">
+          Partnership
+        </span>
+        <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-600">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Open for Inquiries
+        </span>
+      </div>
+
+      <div class="md:col-span-5">
+        <h3 class="font-hero-minimal text-2xl sm:text-3xl text-neutral-950 font-normal tracking-tight mb-3">
+          Research Fellowships &amp; Pilot Labs
+        </h3>
+        <p class="font-hero-minimal text-sm sm:text-base text-neutral-500 font-light leading-relaxed">
+          We collaborate with research labs and engineering teams pushing the boundary of autonomous architectures.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 font-mono text-xs text-neutral-900 md:text-right">
+        <a href="#contact" class="hover:text-neutral-500 transition-colors inline-flex items-center gap-1">
+          Initiate inquiry &rarr;
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
