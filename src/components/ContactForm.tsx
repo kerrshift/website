@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { ArrowUpRight, Check, Loader2, ChevronDown } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import SectionHeader from './SectionHeader';
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -63,38 +62,36 @@ export default function ContactForm() {
     }
   };
 
+  const field =
+    'w-full bg-white/[0.03] border border-white/[0.08] hover:border-white/20 focus:border-white/40 focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[15px] text-fg placeholder:text-faint outline-none transition-colors';
+  const label = 'block text-[13px] text-dim mb-2';
+
   return (
-    <section id="contact" className="w-full bg-transparent text-left relative z-10 border-t border-black/[0.06]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-40">
-        
-        {/* Unified Section Header */}
-        <SectionHeader number="03" title="Studio & Development" />
+    <section id="contact" className="relative border-t hairline scroll-mt-20 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_15%_0%,rgba(255,138,76,0.07),transparent_70%)]" />
+      <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-10 py-28 sm:py-36">
+        <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-start">
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-          
-          {/* Left: Studio Positioning & Invitation */}
-          <div className="lg:col-span-5 space-y-6">
-            <h2 className="font-hero-minimal text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-neutral-950 leading-[1.12]">
-              Let's build together.
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <p className="eyebrow mb-5">04 &mdash; Contact</p>
+            <h2 className="text-4xl sm:text-5xl font-medium tracking-[-0.035em] text-fg [text-wrap:balance]">
+              Let's build <span className="serif-accent font-normal text-[1.08em]">together.</span>
             </h2>
-            
-            <p className="font-hero-minimal text-base sm:text-lg text-neutral-700 font-light leading-relaxed max-w-md">
-              KerrShift operates as a dedicated software &amp; AI development studio. We collaborate with founders and forward-thinking teams to architect, design, and ship production-ready web applications, developer tooling, and autonomous AI systems.
+            <p className="mt-6 text-dim leading-relaxed max-w-md">
+              Alongside our own products, we partner with a small number of founders and teams to design
+              and ship AI systems, developer tools and production web apps.
             </p>
-
-            {/* Studio Capabilities Pill List */}
-            <div className="pt-2 flex flex-wrap gap-2 font-mono text-xs text-neutral-800">
-              <span className="px-3 py-1 bg-neutral-100 border border-neutral-200">Custom AI &amp; Agents</span>
-              <span className="px-3 py-1 bg-neutral-100 border border-neutral-200">Full-Stack Web Apps</span>
-              <span className="px-3 py-1 bg-neutral-100 border border-neutral-200">Product Engineering</span>
+            <div className="mt-8 flex flex-wrap gap-2 text-[12px] text-dim">
+              <span className="rounded-full border hairline px-3 py-1.5">Custom AI &amp; agents</span>
+              <span className="rounded-full border hairline px-3 py-1.5">Full-stack products</span>
+              <span className="rounded-full border hairline px-3 py-1.5">AgentDiff integration</span>
             </div>
           </div>
 
-          {/* Right: High-Visibility Boxless Form */}
-          <div className="lg:col-span-7 w-full">
+          <div className="lg:col-span-7 rounded-3xl border hairline bg-ink-2 p-6 sm:p-10">
             {submitted ? (
-              <div className="py-2 space-y-6 animate-in fade-in duration-200">
-                <p className="font-hero-minimal text-2xl sm:text-3xl text-neutral-950 font-normal">
+              <div className="py-10 space-y-6">
+                <p className="text-2xl sm:text-3xl font-medium tracking-tight text-fg">
                   Received. We'll be in touch shortly.
                 </p>
                 <button
@@ -103,44 +100,34 @@ export default function ContactForm() {
                     setSubmitted(false);
                     setFormData({ name: '', email: '', inquiryType: 'Studio: Build a New Product or Web App', message: '' });
                   }}
-                  className="font-mono text-xs text-neutral-500 hover:text-neutral-950 transition-colors inline-flex items-center gap-1"
+                  className="text-sm text-dim hover:text-fg transition-colors cursor-pointer"
                 >
-                  <span>&larr;</span>
-                  <span>Send another message</span>
+                  &larr; Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-10">
-                
-                {/* Inquiry Type Dropdown - Clear, high contrast */}
-                <div className="space-y-2 relative">
-                  <label htmlFor="inquiryType" className="block font-mono text-xs uppercase tracking-widest text-neutral-600 font-normal">
-                    What can we build or collaborate on?
-                  </label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="inquiryType" className={label}>What are you looking for?</label>
                   <div className="relative">
                     <select
                       id="inquiryType"
                       value={formData.inquiryType}
                       onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                      className="w-full bg-transparent border-b-2 border-neutral-300 hover:border-neutral-700 focus:border-neutral-950 py-3.5 pr-8 text-base sm:text-lg text-neutral-950 outline-none transition-colors font-hero-minimal font-normal cursor-pointer appearance-none rounded-none"
+                      className={`${field} appearance-none pr-10 cursor-pointer`}
                     >
-                      <option value="Studio: Build a New Product or Web App" className="bg-white text-neutral-900 py-2">Studio &bull; Build a New Product or Web App</option>
-                      <option value="Engineering: Custom AI & Agent Systems" className="bg-white text-neutral-900 py-2">Engineering &bull; Custom AI &amp; Agent Systems</option>
-                      <option value="AgentDiff: Enterprise Integration" className="bg-white text-neutral-900 py-2">AgentDiff &bull; Enterprise Integration &amp; CI Gating</option>
-                      <option value="General Collaboration" className="bg-white text-neutral-900 py-2">Open Source &bull; General Collaboration</option>
+                      <option value="Studio: Build a New Product or Web App" className="bg-ink-2">Build a new product or web app</option>
+                      <option value="Engineering: Custom AI & Agent Systems" className="bg-ink-2">Custom AI &amp; agent systems</option>
+                      <option value="AgentDiff: Enterprise Integration" className="bg-ink-2">AgentDiff integration &amp; CI gating</option>
+                      <option value="General Collaboration" className="bg-ink-2">Something else</option>
                     </select>
-                    <ChevronDown className="w-4 h-4 text-neutral-700 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-4 h-4 text-dim absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
 
-                {/* Name & Email Inputs - Clean underline with high-contrast text and legible placeholders */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                  
-                  {/* Name field */}
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest text-neutral-600 font-normal">
-                      Your Name
-                    </label>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className={label}>Name</label>
                     <input
                       id="name"
                       name="name"
@@ -149,15 +136,11 @@ export default function ContactForm() {
                       placeholder="Alex Chen"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-transparent border-b-2 border-neutral-300 hover:border-neutral-700 focus:border-neutral-950 py-3.5 text-base sm:text-lg text-neutral-950 placeholder:text-neutral-400 outline-none transition-colors font-hero-minimal font-normal rounded-none"
+                      className={field}
                     />
                   </div>
-
-                  {/* Email field */}
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest text-neutral-600 font-normal">
-                      Email Address
-                    </label>
+                  <div>
+                    <label htmlFor="email" className={label}>Email</label>
                     <input
                       id="email"
                       name="email"
@@ -166,84 +149,66 @@ export default function ContactForm() {
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-transparent border-b-2 border-neutral-300 hover:border-neutral-700 focus:border-neutral-950 py-3.5 text-base sm:text-lg text-neutral-950 placeholder:text-neutral-400 outline-none transition-colors font-hero-minimal font-normal rounded-none"
+                      className={field}
                     />
                   </div>
                 </div>
 
-                {/* Message field */}
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest text-neutral-600 font-normal">
-                    Project Overview or Scope
-                  </label>
+                <div>
+                  <label htmlFor="message" className={label}>Tell us a little</label>
                   <textarea
                     id="message"
                     name="message"
                     required
-                    rows={4}
-                    placeholder="Tell us what product you want to build, timeline, or key technical requirements..."
+                    rows={5}
+                    placeholder="What you're building, rough timeline, anything we should know..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-transparent border-b-2 border-neutral-300 hover:border-neutral-700 focus:border-neutral-950 py-3.5 text-base sm:text-lg text-neutral-950 placeholder:text-neutral-400 outline-none transition-colors font-hero-minimal font-normal resize-none leading-relaxed rounded-none"
+                    className={`${field} resize-none leading-relaxed`}
                   ></textarea>
                 </div>
 
-                {/* hCaptcha Spam Protection */}
-                <div className="pt-2">
-                  <HCaptcha
-                    ref={captchaRef}
-                    sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-                    onVerify={(token) => {
-                      setCaptchaToken(token);
-                      setErrorMessage('');
-                    }}
-                    onExpire={() => setCaptchaToken('')}
-                    onError={() => {
-                      setCaptchaToken('');
-                      setErrorMessage('Captcha verification error. Please retry.');
-                    }}
-                    theme="light"
-                  />
-                </div>
+                <HCaptcha
+                  ref={captchaRef}
+                  sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setErrorMessage('');
+                  }}
+                  onExpire={() => setCaptchaToken('')}
+                  onError={() => {
+                    setCaptchaToken('');
+                    setErrorMessage('Captcha verification error. Please retry.');
+                  }}
+                  theme="dark"
+                />
 
-                {/* Error Banner */}
-                {errorMessage && (
-                  <p className="font-mono text-xs text-rose-600 animate-in fade-in">
-                    {errorMessage}
-                  </p>
-                )}
+                {errorMessage && <p className="text-sm text-rose-400">{errorMessage}</p>}
 
-                {/* Submit Action */}
-                <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <span className="font-mono text-xs text-neutral-500">
-                    We typically reply within 24 hours.
-                  </span>
-
+                <div className="pt-2 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-4">
+                  <span className="text-[13px] text-faint">We usually reply within a day.</span>
                   <button
                     type="submit"
                     disabled={loading}
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-neutral-950 hover:bg-neutral-800 active:scale-95 text-white font-mono text-xs uppercase tracking-wider transition-all disabled:opacity-50 cursor-pointer shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-fg text-ink text-sm font-medium hover:bg-white active:scale-[0.98] transition-all disabled:opacity-50 cursor-pointer"
                   >
                     {loading ? (
                       <>
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                        <span>Sending...</span>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending
                       </>
                     ) : (
                       <>
-                        <span>Submit Inquiry</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        Send message
+                        <ArrowUpRight className="w-4 h-4" />
                       </>
                     )}
                   </button>
                 </div>
-
               </form>
             )}
           </div>
-
         </div>
-
       </div>
     </section>
   );

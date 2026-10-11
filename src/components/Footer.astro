@@ -1,98 +1,62 @@
 ---
+const columns = [
+  {
+    heading: 'Products',
+    links: [
+      { label: 'AgentDiff', href: 'https://agentdiff.app/' },
+      { label: 'Documentation', href: 'https://agentdiff.app/docs' },
+    ],
+  },
+  {
+    heading: 'Elsewhere',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/kerrshift' },
+      { label: 'Sahil Gangurde', href: 'https://lostmartian.in/' },
+    ],
+  },
+];
 ---
 
-<footer class="w-full border-t border-black/[0.06] bg-transparent relative z-20">
-  <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-12 sm:pt-20 sm:pb-14">
-    
-    <!-- Top Row: Editorial Brand + Navigation Links -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 pb-14 border-b border-black/[0.05]">
-      
-      <!-- Brand column: pure typography matching header and hero (no logo) -->
-      <div class="md:col-span-6 flex flex-col justify-start">
-        <span class="font-hero-minimal text-xl sm:text-2xl text-neutral-950 tracking-tight mb-4 select-none">
-          KerrShift
-        </span>
-        <p class="font-hero-minimal text-sm sm:text-base text-neutral-500 leading-relaxed max-w-sm">
-          Autonomous systems, latent intelligence, and next-generation software primitives.
+<footer class="relative border-t hairline overflow-hidden">
+  <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 pt-20">
+    <div class="grid md:grid-cols-12 gap-12 pb-16">
+      <div class="md:col-span-6">
+        <div class="flex items-center gap-2.5">
+          <img src="/favicon.svg" alt="" width="22" height="22" class="w-[22px] h-[22px]" />
+          <span class="text-[15px] font-medium tracking-tight text-fg">KerrShift</span>
+        </div>
+        <p class="mt-5 text-dim leading-relaxed max-w-sm">
+          An applied intelligence lab. Instruments for autonomous software.
         </p>
       </div>
 
-      <!-- Clean 2-Column Links: Index & Coordinates -->
-      <div class="md:col-span-6 grid grid-cols-2 gap-8 sm:gap-12 md:justify-end">
-        
-        <!-- Projects -->
-        <div class="flex flex-col gap-3.5">
-          <span class="font-mono text-[11px] uppercase tracking-widest text-neutral-400 font-medium">
-            Projects
-          </span>
-          <ul class="flex flex-col gap-2.5 font-hero-minimal text-sm text-neutral-600">
-            <li>
-              <a 
-                href="https://agentdiff.app/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="hover:text-neutral-950 transition-colors inline-flex items-center gap-1 group"
-              >
-                AgentDiff
-                <span class="text-[10px] text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">&nearr;</span>
-              </a>
-            </li>
-            <li>
-              <a 
-                href="https://agentdiff.app/docs" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="hover:text-neutral-950 transition-colors inline-flex items-center gap-1 group"
-              >
-                Documentation
-                <span class="text-[10px] text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">&nearr;</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Signal / Coordinates -->
-        <div class="flex flex-col gap-3.5">
-          <span class="font-mono text-[11px] uppercase tracking-widest text-neutral-400 font-medium">
-            Signal
-          </span>
-          <ul class="flex flex-col gap-2.5 font-hero-minimal text-sm text-neutral-600">
-            <li>
-              <a 
-                href="https://github.com/kerrshift" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="hover:text-neutral-950 transition-colors inline-flex items-center gap-1 group"
-              >
-                GitHub
-                <span class="text-[10px] text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">&nearr;</span>
-              </a>
-            </li>
-            <li>
-              <a 
-                href="https://lostmartian.in/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="hover:text-neutral-950 transition-colors inline-flex items-center gap-1 group"
-              >
-                Sahil Gangurde
-                <span class="text-[10px] text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">&nearr;</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
+      <div class="md:col-span-6 grid grid-cols-2 gap-8">
+        {columns.map((c) => (
+          <div>
+            <p class="eyebrow text-faint mb-4">{c.heading}</p>
+            <ul class="space-y-3 text-[14px]">
+              {c.links.map((l) => (
+                <li>
+                  <a href={l.href} target="_blank" rel="noopener noreferrer" class="group text-dim hover:text-fg transition-colors">
+                    {l.label}
+                    <span class="inline-block text-faint group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">&nearr;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-
     </div>
 
-    <!-- Bottom Bar: Fine print matching header/hero typography -->
-    <div class="pt-5 border-t border-black/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-neutral-400">
-      <p>
-        &copy; {new Date().getFullYear()} KerrShift &bull; Founded by <a href="https://lostmartian.in/" target="_blank" rel="noopener noreferrer" class="text-neutral-600 hover:text-neutral-950 transition-colors underline decoration-neutral-300 underline-offset-2">Sahil Gangurde</a>
-      </p>
-      <p class="uppercase tracking-wider text-[10px] text-neutral-400">Autonomous systems &bull; Parent of AgentDiff</p>
+    <div class="flex flex-col sm:flex-row justify-between gap-3 py-6 border-t hairline text-[12px] text-faint">
+      <p>&copy; {new Date().getFullYear()} KerrShift. Founded by Sahil Gangurde.</p>
+      <p class="font-mono">Something is shifting.</p>
     </div>
+  </div>
 
+  <!-- Oversized wordmark bleeding off the bottom edge -->
+  <div aria-hidden="true" class="select-none pointer-events-none text-center leading-[0.75] -mb-[0.12em] font-medium tracking-[-0.06em] text-[22vw] bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text text-transparent">
+    KerrShift
   </div>
 </footer>
