@@ -1,0 +1,137 @@
+---
+// Unreleased work. Codenames borrow from rotating black-hole physics; keep descriptions vague.
+const upcoming = [
+  {
+    codename: 'Ergosphere',
+    status: 'In development',
+    line: 'For systems that keep running long after you stop watching.',
+    bars: [72, 48],
+  },
+  {
+    codename: 'Penrose',
+    status: 'Research',
+    line: 'Extracting more from the models you already have.',
+    bars: [64, 36],
+  },
+  {
+    codename: 'Horizon',
+    status: 'Exploring',
+    line: 'A way to see what your software is actually doing.',
+    bars: [80, 52],
+  },
+];
+
+const golden = ['plan', 'search_docs', 'summarize', 'respond'];
+const candidate: { step: string; mark?: string }[] = [
+  { step: 'plan' },
+  { step: 'search_docs' },
+  { step: 'search_docs', mark: '↺' },
+  { step: 'search_docs', mark: '↺' },
+];
+---
+
+<section id="work" class="relative mx-auto w-full max-w-7xl px-6 sm:px-10 py-28 sm:py-36 scroll-mt-20">
+  <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+    <div>
+      <p class="eyebrow mb-5">01 &mdash; Work</p>
+      <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.035em] text-fg max-w-2xl [text-wrap:balance]">
+        One in the open. <span class="text-faint">The rest, soon.</span>
+      </h2>
+    </div>
+    <p class="text-dim max-w-sm leading-relaxed">
+      We ship small, sharp tools and let them earn their place. Here's what's out, and what's coming.
+    </p>
+  </div>
+
+  <!-- Featured: AgentDiff -->
+  <a
+    href="https://agentdiff.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="reveal spotlight group block rounded-3xl border hairline overflow-hidden"
+  >
+    <div class="grid lg:grid-cols-2">
+      <div class="p-8 sm:p-12 flex flex-col">
+        <div class="flex items-center gap-3 mb-10">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-white/[0.04] border hairline">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="w-5 h-5 text-fg" aria-hidden="true">
+              <circle cx="2.9" cy="8" r="1.5" fill="currentColor" stroke="none"></circle>
+              <path d="M3.4 8 L8.25 8 M8.25 8 L13.4 5 M8.25 8 L13.4 11"></path>
+              <circle cx="13.5" cy="5" r="1.05" fill="currentColor" stroke="none"></circle>
+              <circle cx="13.5" cy="11" r="1.05" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-400/10 text-emerald-300 px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider">
+            <span class="pulse-dot"></span> Live
+          </span>
+        </div>
+
+        <h3 class="text-3xl sm:text-4xl font-medium tracking-[-0.03em] text-fg mb-4">
+          AgentDiff
+          <span class="inline-block text-faint group-hover:text-fg group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">&nearr;</span>
+        </h3>
+        <p class="text-lg text-dim leading-relaxed max-w-md mb-10">
+          Tests check the answer. AgentDiff checks the path. It catches runaway loops, silent drift and
+          cost spikes in your agents before they reach a customer.
+        </p>
+
+        <div class="mt-auto flex flex-wrap gap-2 text-[12px] text-dim">
+          <span class="rounded-full border hairline px-3 py-1.5">Trajectory diffing</span>
+          <span class="rounded-full border hairline px-3 py-1.5">Loop defense</span>
+          <span class="rounded-full border hairline px-3 py-1.5">Cost gating</span>
+          <span class="rounded-full border hairline px-3 py-1.5">GitHub Actions</span>
+        </div>
+      </div>
+
+      <!-- Illustrative trajectory diff -->
+      <div class="relative border-t lg:border-t-0 lg:border-l hairline bg-ink p-6 sm:p-10 flex items-center">
+        <div class="w-full rounded-2xl border hairline bg-ink-2 font-mono text-[12.5px] overflow-hidden">
+          <div class="flex items-center justify-between px-4 h-10 border-b hairline text-faint">
+            <span>agentdiff run --against golden</span>
+            <span class="flex gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-white/10"></span>
+              <span class="w-2 h-2 rounded-full bg-white/10"></span>
+              <span class="w-2 h-2 rounded-full bg-white/10"></span>
+            </span>
+          </div>
+          <div class="grid grid-cols-2 text-faint px-4 pt-4 pb-2 text-[11px] uppercase tracking-wider">
+            <span>golden</span><span>candidate</span>
+          </div>
+          {golden.map((g, i) => {
+            const c = candidate[i];
+            const diverged = c.step !== g;
+            return (
+              <div class:list={['grid grid-cols-2 px-4 py-1.5', diverged && 'bg-[#ff8a4c]/[0.06]']}>
+                <span class="text-dim">{g}</span>
+                <span class:list={[diverged ? 'text-accent' : 'text-dim']}>
+                  {diverged ? '~ ' : '  '}{c.step} {c.mark && <span class="text-accent/70">{c.mark}</span>}
+                </span>
+              </div>
+            );
+          })}
+          <div class="px-4 py-4 mt-2 border-t hairline space-y-1">
+            <div class="text-accent">&#x2717; loop detected &middot; search_docs &times;3</div>
+            <div class="text-faint">  cost +212% vs baseline &middot; run halted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Upcoming -->
+  <div class="grid md:grid-cols-3 gap-4 mt-4">
+    {upcoming.map((p, i) => (
+      <div class="reveal spotlight rounded-3xl border hairline p-8 flex flex-col min-h-[280px]" style={`transition-delay:${i * 90}ms`}>
+        <div class="flex items-center justify-between">
+          <span class="eyebrow text-faint">Codename</span>
+          <span class="text-[11px] font-mono uppercase tracking-wider text-faint">{p.status}</span>
+        </div>
+        <h3 class="mt-14 text-2xl font-medium tracking-[-0.02em] text-fg">{p.codename}</h3>
+        <p class="mt-3 text-dim leading-relaxed">{p.line}</p>
+        <div class="mt-auto pt-8 space-y-2" aria-hidden="true">
+          {p.bars.map((w) => <span class="redacted" style={`width:${w}%`}></span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

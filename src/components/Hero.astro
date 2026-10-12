@@ -1,0 +1,165 @@
+---
+---
+
+<section class="relative min-h-[100svh] flex flex-col overflow-hidden">
+  <div class="absolute inset-0 grid-backdrop pointer-events-none"></div>
+  <canvas id="kerr-field" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+  <!-- Keeps the left column legible over the animation -->
+  <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,var(--color-ink)_0%,rgba(7,7,10,0.75)_35%,transparent_70%)]"></div>
+  <div class="absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-b from-transparent to-ink"></div>
+
+  <div class="relative z-10 flex-1 flex flex-col justify-center mx-auto w-full max-w-7xl px-6 sm:px-10 pt-32 pb-24">
+    <div class="inline-flex items-center gap-2.5 self-start rounded-full border hairline bg-white/[0.03] pl-2.5 pr-3.5 py-1.5 mb-10">
+      <span class="pulse-dot text-emerald-400"></span>
+      <span class="text-[12px] text-dim">AgentDiff v0.5 is live &mdash; more in the works</span>
+    </div>
+
+    <h1 class="max-w-4xl text-[2.75rem] leading-[1.02] sm:text-7xl lg:text-[5.75rem] font-medium tracking-[-0.045em] text-fg [text-wrap:balance]">
+      Something is shifting in the <span class="serif-accent font-normal text-[1.08em]">quiet.</span>
+    </h1>
+
+    <p class="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-dim [text-wrap:pretty]">
+      KerrShift is an applied intelligence lab. We build the instruments
+      that let autonomous software be trusted&mdash;and a few things we can't talk about yet.
+    </p>
+
+    <div class="mt-12 flex flex-wrap items-center gap-3">
+      <a
+        href="#work"
+        class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-fg text-ink text-sm font-medium hover:bg-white transition-colors"
+      >
+        See the work
+        <span aria-hidden="true">&darr;</span>
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 h-12 px-6 rounded-full border hairline text-sm text-fg hover:bg-white/[0.05] transition-colors"
+      >
+        Build with us
+      </a>
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 pb-8 flex items-end justify-between eyebrow text-faint">
+    <span>Applied intelligence &middot; Independent</span>
+    <span class="hidden sm:inline">a &rarr; 0.998 &middot; frame-dragging</span>
+  </div>
+</section>
+
+<script>
+  // Particles on an inclined accretion disk: inner orbits move faster (roughly Keplerian),
+  // with a dark horizon at the centre that occludes whatever passes behind it.
+  const canvas = document.getElementById('kerr-field') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  type P = { r: number; t: number; w: number; a: number };
+  let particles: P[] = [];
+  let W = 0, H = 0, cx = 0, cy = 0, R = 0, dpr = 1;
+  const TILT = 0.32;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth;
+    H = canvas.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const wide = W >= 900;
+    cx = wide ? W * 0.72 : W * 0.5;
+    cy = wide ? H * 0.5 : H * 0.84;
+    R = Math.min(wide ? W * 0.38 : W * 0.75, H * 0.7);
+
+    const n = wide ? 1600 : 800;
+    particles = Array.from({ length: n }, () => {
+      const r = R * (0.18 + Math.pow(Math.random(), 1.6) * 0.95);
+      return {
+        r,
+        t: Math.random() * Math.PI * 2,
+        w: 0.0016 * Math.pow(R / r, 1.5),
+        a: 0.15 + Math.random() * 0.55,
+      };
+    });
+  }
+
+  function project(r: number, t: number) {
+    return [cx + Math.cos(t) * r, cy + Math.sin(t) * r * TILT, Math.sin(t)] as const;
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    const horizon = R * 0.13;
+
+    // Faint glow around the horizon
+    const g = ctx.createRadialGradient(cx, cy, horizon * 0.6, cx, cy, R * 0.55);
+    g.addColorStop(0, 'rgba(255,138,76,0.10)');
+    g.addColorStop(1, 'rgba(255,138,76,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.lineCap = 'round';
+    for (const p of particles) {
+      if (!reduced) p.t += p.w;
+      const [x, y, depth] = project(p.r, p.t);
+      const [px, py] = project(p.r, p.t - p.w * 9);
+
+      const inner = 1 - Math.min(1, (p.r - R * 0.18) / (R * 0.9));
+      const alpha = p.a * (0.35 + inner * 0.65) * (depth < 0 ? 0.55 : 1);
+      const warm = inner * inner;
+      const rC = 255;
+      const gC = Math.round(255 - warm * 120);
+      const bC = Math.round(255 - warm * 180);
+      ctx.strokeStyle = `rgba(${rC},${gC},${bC},${alpha})`;
+      ctx.lineWidth = 0.6 + inner * 0.9;
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    // Horizon disc and photon ring
+    ctx.fillStyle = '#07070a';
+    ctx.beginPath();
+    ctx.arc(cx, cy, horizon, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,190,150,0.35)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, horizon * 1.06, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Redraw the near half of the disk on top of the horizon
+    for (const p of particles) {
+      const [x, y, depth] = project(p.r, p.t);
+      if (depth <= 0 || Math.hypot(x - cx, y - cy) > horizon * 1.2) continue;
+      const [px, py] = project(p.r, p.t - p.w * 9);
+      ctx.strokeStyle = `rgba(255,200,160,${p.a})`;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+  }
+
+  let raf = 0;
+  let visible = true;
+  function loop() {
+    frame();
+    if (visible && !reduced) raf = requestAnimationFrame(loop);
+  }
+
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+    cancelAnimationFrame(raf);
+    if (visible) loop();
+  }).observe(canvas);
+
+  window.addEventListener('resize', () => {
+    resize();
+    if (reduced) frame();
+  });
+  resize();
+  loop();
+</script>

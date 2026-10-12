@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#07070a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/kerrshift-logo-32x32.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo/kerrshift-logo-128x128.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/assets/logo/kerrshift-logo-512x512.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <slot name="head" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="grain min-h-screen flex flex-col">
+    <slot />
+
+    <script>
+      // Fade sections in as they enter the viewport
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Cursor-following spotlight on cards
+      document.querySelectorAll<HTMLElement>('.spotlight').forEach((el) => {
+        el.addEventListener('pointermove', (ev) => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty('--mx', `${ev.clientX - r.left}px`);
+          el.style.setProperty('--my', `${ev.clientY - r.top}px`);
+        });
+      });
+    </script>
+  </body>
+</html>

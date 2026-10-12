@@ -1,0 +1,52 @@
+---
+const fields = [
+  { n: '01', title: 'Verification', body: 'Knowing an autonomous system did the right thing, the right way.' },
+  { n: '02', title: 'Autonomy', body: 'Software that plans, acts and recovers without being asked twice.' },
+  { n: '03', title: 'Interfaces', body: 'New surfaces for working alongside machines that reason.' },
+  { n: '04', title: 'Infrastructure', body: 'The quiet plumbing that makes all of it hold up at scale.' },
+];
+---
+
+<section id="focus" class="relative border-y hairline bg-ink-2/60 scroll-mt-20">
+  <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 py-28 sm:py-36">
+    <div class="reveal grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-5">
+        <p class="eyebrow mb-5">02 &mdash; Focus</p>
+        <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.035em] text-fg [text-wrap:balance]">
+          Where we spend our attention.
+        </h2>
+      </div>
+      <p class="lg:col-span-5 lg:col-start-8 self-end text-dim leading-relaxed">
+        Four threads run through everything we make. Every product starts as an experiment in one of them.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 border-t hairline">
+      {fields.map((f, i) => (
+        <div
+          class:list={[
+            'reveal group py-10 pr-8 border-b hairline sm:[&:nth-child(odd)]:border-r lg:border-r lg:[&:last-child]:border-r-0',
+            i > 0 && 'lg:pl-8',
+            i % 2 === 1 && 'sm:pl-8',
+          ]}
+          style={`transition-delay:${i * 80}ms`}
+        >
+          <span class="font-mono text-xs text-faint group-hover:text-accent transition-colors">{f.n}</span>
+          <h3 class="mt-10 text-xl font-medium text-fg">{f.title}</h3>
+          <p class="mt-3 text-dim leading-relaxed text-[15px]">{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_50%_60%_at_50%_100%,rgba(255,138,76,0.10),transparent_70%)]"></div>
+  <div class="reveal relative mx-auto w-full max-w-5xl px-6 sm:px-10 py-32 sm:py-44 text-center">
+    <p class="text-3xl sm:text-5xl lg:text-6xl font-medium tracking-[-0.04em] leading-[1.1] text-fg [text-wrap:balance]">
+      The next era of software won't be written line by line. It will be
+      <span class="serif-accent logo-gradient-text text-[1.1em] pr-1">steered.</span>
+    </p>
+    <p class="mt-8 text-dim text-lg">We're building the instruments.</p>
+  </div>
+</section>
